@@ -1,0 +1,36 @@
+# ============================================================================
+# dsh-ledger-dock —— DSH bundle patch
+# ============================================================================
+# 纯本地，不联网：账本存在 $DSH_HOME/dsh-ledger-dock/state.json。
+#
+# 宿主半（lib/index.js）：
+#   GET/POST /dsh-ledger/state  读/写账目
+#   + ledger_panel 工具（Agent 侧：记账、按月汇总、看分类）
+# 客户端半（lib/client.js）是右侧栏 tab：记一笔 + 本月 + 分类统计。
+#
+# 安装：
+#   plugin_manager install_bundle  target=link:E:\development\dsh-ledger-dock
+# ⚠️ 客户端半边改动要重启应用；新增宿主路由也要重启（实测）。
+# ============================================================================
+
+- insert:
+    - id: dsh-ledger-dock
+      name: dsh-ledger-dock
+      config:
+        # 货币符号（只影响显示）
+        currency: '¥'
+        # 分类清单：记账时从这里选，也是统计的口径
+        categories:
+          - 餐饮
+          - 交通
+          - 购物
+          - 居住
+          - 医疗
+          - 娱乐
+          - 学习
+          - 人情
+          - 其他
+        incomeCategories:
+          - 工资
+          - 报销
+          - 其他收入
